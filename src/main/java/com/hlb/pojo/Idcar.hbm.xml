@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hlb.pojo">
+    <class name="Idcar" table="tb_idcar">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+       <property name="addr"/>
+        <property name="birthday"/>
+        <property name="userid" insert="false" update="false"/>
+        <many-to-one name="user" class="com.hlb.pojo.User" unique-key="true">
+            <column name="userid" />
+        </many-to-one>
+    </class>
+
+</hibernate-mapping>

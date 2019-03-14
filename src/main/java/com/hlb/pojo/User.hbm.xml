@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hlb.pojo">
+    <class name="User" table="tb_user" lazy="true">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="telephone"/>
+        <property name="addr"/>
+        <property name="password"/>
+        <property name="username"/>
+        <!--添加一对多关系-->
+        <bag name="orders" cascade="delete">
+            <key column="userid"></key>
+            <one-to-many class="Order"/>
+        </bag>
+        <set name="orderSet" table="tb_order">
+            <key column="userid"></key>
+            <one-to-many class="Order"/>
+        </set>
+        <map name="orderMap" table="tb_order">
+            <key column="userid"></key>
+            <map-key type="java.lang.Integer" column="id"/>
+            <one-to-many class="Order"/>
+        </map>
+        <one-to-one name="idcar" property-ref="user" class="com.hlb.pojo.Idcar"/>
+
+        <!--配置多对多关系-->
+        <bag name="couponsList" table="user_coupons">
+            <key column="userid"></key>
+            <many-to-many class="com.hlb.pojo.Coupons" column="couponsid"/>
+        </bag>
+        
+        <query name="getUserById">
+            from User where id = ?0
+        </query>
+
+    </class>
+
+</hibernate-mapping>

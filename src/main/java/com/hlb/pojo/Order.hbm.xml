@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hlb.pojo">
+    <class name="Order" table="tb_order" lazy="false" >
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="num"/>
+        <property name="createtime"/>
+        <property name="state"/>
+        <property name="totalprice"/>
+        <property name="userid" insert="false" update="false"/>
+        <many-to-one name="user" class="com.hlb.pojo.User">
+            <column name="userid"/>
+        </many-to-one>
+    </class>
+
+</hibernate-mapping>

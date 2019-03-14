@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 指定Hibernate配置文件的DTD信息 -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- hibernate- configuration是连接配置文件的根元素 -->
+<hibernate-configuration>
+    <session-factory>
+        <!-- 指定连接数据库所用的驱动 -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!-- 指定连接数据库的url，hibernate连接的数据库名 -->
+        <property name="connection.url">jdbc:mysql://localhost/ku5?useUnicode=true&amp;characterEncoding=utf-8</property>
+        <!-- 指定连接数据库的用户名 -->
+        <property name="connection.username">root</property>
+        <!-- 指定连接数据库的密码 -->
+        <property name="connection.password">root</property>
+
+        <!--自动更新表结构-->
+        <!--<property name="hbm2ddl.auto">update</property>-->
+
+        <!--开启二级缓存-->
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <!--提供第三方的实现-->
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.internal.EhcacheRegionFactory</property>
+
+
+        <!-- 指定数据库方言 -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!-- 显示Hibernate持久化操作所生成的SQL -->
+        <property name="show_sql">true</property>
+        <!--线程优化-->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!-- 将SQL脚本进行格式化后再输出 -->
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- 罗列所有的映射文件 -->
+        <mapping resource="com/hlb/pojo/User.hbm.xml"/>
+        <mapping resource="com/hlb/pojo/Order.hbm.xml"/>
+        <mapping resource="com/hlb/pojo/Idcar.hbm.xml"/>
+        <mapping resource="com/hlb/pojo/Coupons.hbm.xml"/>
+
+        <class-cache class="com.hlb.pojo.Order" usage="read-only"/>
+        <class-cache class="com.hlb.pojo.User" usage="read-only"/>
+
+    </session-factory>
+</hibernate-configuration>
